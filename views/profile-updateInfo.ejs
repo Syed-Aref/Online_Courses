@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/form.css" />
+    <title>Update</title>
+  </head>
+  <body>
+    <%-include('partials/nav.ejs')%>
+    <h1>Update Personal Info</h1>
+    <img src="assets/logo.png" alt="Logo" />
+    <form action="/profile/<%= user._id %>/updateInfo" method="post">
+      Name: <input type="text" name="fullname" value="<%= user.fullname %>" placeholder="Full Name" />
+      Country: <input type="text" name="country" value="<%= user.country %>" placeholder="Country" />
+      Facebook: <input type="text" name="social0" value="<%= user.socials[0] %>" placeholder="Facebook" />
+      Instagram:<input type="text" name="social1" value="<%= user.socials[1] %>" placeholder="Instagram" />
+      Twitter: <input type="text" name="social2" value="<%= user.socials[2] %>" placeholder="Twitter" />
+      <input type="submit" value="Update" />
+    </form>
+  </body>
+</html>

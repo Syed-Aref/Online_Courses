@@ -1,0 +1,16 @@
+const Course = require("../models/Course");
+
+const getIndex = async (req, res) => {
+    console.log(req.session);
+    try{
+        await Course.updateMany({}, {
+          contents: []
+        });
+        console.log("updateMany successful");
+      } catch(e){
+        res.json(`(Error) updateMany failed`);
+      }      
+    res.render("index");
+};
+
+module.exports = {getIndex};

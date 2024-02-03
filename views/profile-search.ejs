@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/profile.css" />
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Profile</title>
+  </head>
+
+  <body>
+    <%-include('partials/nav.ejs')%>
+    <h1>Profile (Search)</h1>
+    <form action="/profile/<%= user._id %>/search" method="post">
+        <input type="text" name="searchTerm">
+        <input type="submit" value="Search">
+    </form>
+
+    <% if(course_cid_list.length > 0) { %> 
+      <div style="width: 60%; margin: 30px; border: 2px solid #3498db; padding: 10px; border-radius: 10px; box-sizing: border-box; overflow: hidden;">
+        <ul style="list-style-type: none; padding: 0;">
+          <% for(var i = 0; i < course_cid_list.length; i++){ %>
+            <li style="margin-bottom: 10px; clear: both; border: 1px solid #e1e1e1; padding: 10px; border-radius: 5px; background-color: #f9f9f9; box-sizing: border-box; overflow: hidden;">
+              <span style="float: left; color: #333; font-size: 16px; width: 70%; display: inline-block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><%= course_title_list[i] %></span>
+              <span style="float: right; color: #555; font-size: 14px; width: 25%; display: inline-block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                <% if(user.courses.includes(course_cid_list[i])) { %> 
+                  You have taken this course
+                <% } else if(user.cart.includes(course_cid_list[i])) { %> 
+                  You have taken this course 
+                <% } else { %> 
+                  <button class = "addCourse" data-course-id="<%= course_cid_list[i] %>">
+                    <% if(course_charge_list[i] == 0){ %> 
+                      Add this course for free
+                    <% } else{ %> 
+                      Add this course in your cart
+                    <% } %>
+                  </button>
+                <% } %> 
+              </span>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    <% } %>
+    
+    <script>
+      var addCourseButtons = document.getElementsByClassName('addCourse');
+      Array.from(addCourseButtons).forEach(function(button) {
+        button.addEventListener('click', function(event) {
+          var baseUrl = window.location.origin;
+          console.log(baseUrl);
+
+          console.log(`<%= user._id %>`);
+
+          var courseId = event.currentTarget.dataset.courseId;
+          console.log(courseId);
+
+          fetch(`${baseUrl}/profile/<%= user._id %>/addCousrse`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            cid: courseId
+          }),
+          }).then(res => {
+            if(res.ok) {
+              console.log("OK");
+              res.text().then(data=>{
+                window.location.reload();
+                console.log(data);
+              }).catch(e=>{
+                console.log(e);
+              });
+            }
+            else console.log("Not OK");
+          }).catch(e => {
+            console.error('Error:', e);
+          });
+          });
+        });
+    </script>    
+  </body>

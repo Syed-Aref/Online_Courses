@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/course.css" />
+    <title>Courses</title>
+  </head>
+  <body>
+    <header>
+      <h1>Courses of <%= user.fullname %></h1>
+    </header>
+
+    <div class="container">
+      <% if (user.role==="creator") { %>
+        Your created courses: 
+        <% courses.forEach(course => { %>
+          <li><a href="/profile/<%= user._id %>/course/<%= course.cid %>"><%= course.title %></a></li>
+        <% }); %>
+      <% } else if (user.role==="student") { %>
+        Your enrolled courses: 
+        <% courses.forEach(course => { %>
+          <li><a href="/profile/<%= user._id %>/course/<%= course.cid %>/studentView"><%= course.title %></a></li>
+        <% }); %>
+      <% } %>
+    </div>
+  </body>
+</html>

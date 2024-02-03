@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/profile.css" />
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Profile</title>
+  </head>
+
+  <body>
+    <%-include('partials/nav.ejs')%>
+      <h1>Profile</h1>
+
+      <div class="cardContainer">
+        <div class="card">
+          <div class="cardHeader">
+            <h2>User Details</h2>
+          </div>
+          <div class="cardBody">
+            <p><strong>Full Name:</strong>
+              <%= user.email %>
+            </p>
+            <p><strong>Username:</strong>
+              <%= user.username %>
+            </p>
+            <p><strong>Password:</strong>
+              <%= user.password %>
+            </p>
+            <p><strong>Full Name:</strong>
+              <%= user.fullname %>
+            </p>
+
+            <p><strong>Role:</strong>
+              <%= user.role %>
+            </p>
+
+            <p><strong>Country:</strong>
+              <%= user.country %>
+            </p>
+
+            <p>
+              <% if (user.role==="creator") { %>
+                Your created courses: <a href="/profile/<%= user._id %>/courses"> View your created courses </a> <br>
+                View insights of your courses: <a href="/profile/<%= user._id %>/insights"> Click here </a> 
+              <% } else if (user.role==="student") { %>
+                Your enrolled courses: <a href="/profile/<%= user._id %>/courses"> View your enrolled courses </a> <br>
+                Want to explore our other courses? <a href="/profile/<%= user._id %>/search">Click here</a> <br>
+                Want to pay now? <a href="/profile/<%= user._id %>/pay"> Click here </a>
+              <% } %>
+            </p>
+
+            <p>
+              Your socials:
+              <!-- Facebook Icon -->
+              <% if(user.socials[0]!=="" ){ %>
+                <div class="social-icon facebook-icon">
+                  <a href="https://<%= user.socials[0] %>"> <i class="fa fa-facebook fa-3x"></i> </a>
+                </div>
+              <% } %>
+
+              <% if(user.socials[1]!=="" ){ %>
+                <!-- Instagram Icon -->
+                <div class="social-icon instagram-icon">
+                  <a href="https://<%= user.socials[1] %>"><i class="fa fa-instagram fa-3x"></i></a>
+                </div>
+              <% } %>
+
+              <% if(user.socials[2]!=="" ){ %>
+                <!-- Twitter Icon -->
+                <div class="social-icon twitter-icon">
+                  <a href="https://<%= user.socials[2] %>"><i class="fa fa-twitter fa-3x"></i></a>
+                </div>
+              <% } %>
+
+            </p>
+          </div>
+
+          <!-- Logout -->
+          <div class="cardFooter">
+            <% if (user.role==="creator" ) { %>
+              <a href="/profile/<%= user._id %>/createCourse"> Create a course </a> <br>
+
+              <a href="/profile/<%= user._id %>/addDiscount"> Apply Discount</a> 
+              <a href="/profile/<%= user._id %>/removeDiscount">Remove Discount</a> <br>
+            <% } %>
+            <a href="/profile/<%= user._id %>/updateInfo"> Update info </a> <br>
+            <a href="/profile/<%= user._id %>/report"> Send Report to us</a> <br>
+            <a href="/logout">Logout</a> <br>
+          </div>
+        </div>
+      </div>
+  </body>
+</html>

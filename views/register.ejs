@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/form.css" />
+    <title>Registration</title>
+  </head>
+  <body>
+    <%-include('partials/nav.ejs')%>
+    <h1>Register</h1>
+    <img src="assets/logo.png" alt="Logo" />
+    <form action="/register" method="post">
+      <input type="text" name="email" placeholder="Email" />
+      <input type="text" name="username" placeholder="Username" />
+      <input type="password" name="password" placeholder="Password" />
+      <input type="text" name="fullname" placeholder="Full Name" />
+      Join as: 
+      <input type="radio" name="role" value="student"> Student
+      <input type="radio" name="role" value="creator"> Creator <br>
+      <input type="text" name="country" placeholder="Country" />
+      <input type="submit" value="Register" />
+    </form>
+  </body>
+</html>

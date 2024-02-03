@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/course.css" />
+    <title>Course: <%= course.title %></title>
+  </head>
+  <body>
+    <header>
+      <h1>Course: <%= course.title %></h1>
+    </header>
+    <div class="container">
+      <p>Student View</p>
+
+      <% for(var week = 0; week < weeklyContents.length; week++){ %>
+        Week <%= week+1 %> <br>
+        <% for(var lesson = 0; lesson < weeklyContents[week].length; lesson++){ %>
+            Lesson <%= lesson+1 %> <br>
+            Material: <a href="<%= weeklyContents[week][lesson]['file_link'] %>"> Visit the link </a> <br>
+            Description: <%= weeklyContents[week][lesson]['description'] %><br>
+        <% } %>
+        *********************************************** <br>
+    <% } %>
+    </div>
+  </body>
+</html>

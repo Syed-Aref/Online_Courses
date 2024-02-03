@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/course.css" />
+    <title>Course: <%= course.title %></title>
+  </head>
+  <body>
+    <header>
+      <h1>Course: <%= course.title %></h1>
+    </header>
+    <div class="container">
+      <p>Module 2</p>
+      <a href="/profile/<%= user._id %>/course/<%= course.cid %>/sendUpadate"> Send updates </a> <br>
+      <a href="/profile/<%= user._id %>/course/<%= course.cid %>/contentUpload">Set contents for Week <%= course.contents.length+1 %></a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/course.css" />
+    <title>Add weekly content</title>
+  </head>
+  <body>
+    <header>
+      <h1>[<%= course.title %>] Add contents for week: <%= course.contents.length + 1 %></h1>
+    </header>
+    <div class="container">
+      <p>[<%= course.title %>] Add contents for week: <%= course.contents.length + 1 %></p>
+      
+      <form action="" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" /> <br>
+        <input type="text" name="description"> <br>
+        <input type="submit" value="Upload" />
+      </form>
+    </div>
+  </body>
+</html>

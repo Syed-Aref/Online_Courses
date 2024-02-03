@@ -1,0 +1,15 @@
+const Course = require("./models/Course");
+
+const f1 = async () => {
+  const searchTerm = '11';
+  const searchQuery = { cid: { $regex: new RegExp(searchTerm, 'i') } };
+  try{
+    const courses = await Course.find(searchQuery);
+    var course_cid_list = [];
+    for(var course of courses) course_cid_list.push(course.cid);
+    console.log(course_cid_list);
+  } catch(e){
+    console.log(e);
+  }
+};
+f1();

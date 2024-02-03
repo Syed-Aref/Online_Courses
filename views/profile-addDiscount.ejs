@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/form.css" />
+    <title>Add discount</title>
+  </head>
+  <body>
+    <%-include('partials/nav.ejs')%>
+    <h1>Add discount</h1>
+    <img src="assets/logo.png" alt="Logo" />
+    <form action="/profile/<%= user._id %>/addDiscount" method="post">
+      <input type="text" name="cid" placeholder="Course ID" /> <br>
+      <input type="number" name="discount" placeholder="Discout"> <br>
+      <input type="submit" value="Create" />
+    </form>
+  </body>
+</html>

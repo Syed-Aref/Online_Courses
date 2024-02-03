@@ -1,0 +1,5 @@
+db.courses.find({
+  course: {
+    $in: ['english', 'math', 'chinese']
+  }
+})

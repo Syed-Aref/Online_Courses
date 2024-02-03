@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/profile.css" />
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Profile Pay</title>
+  </head>
+  <body>
+    <%-include('partials/nav.ejs')%>
+    <h1>Profile Pay</h1>
+    Your cart list:
+    <ul>
+      <% for(var title of course_titles) {%>
+        <li><%= title %></li>
+      <% } %>
+    </ul>
+
+    Total payment due: <%= totalPayment %>
+
+    <form action="/profile/<%= user._id %>/pay" method="post">
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_51OLRjXJghWWmS1Nebb61iOKeFRDWUaYAhQntDgxD7nCqRZpdCfHx7KEa1fHckEHzMepQAR3PirLISnJ9u4qAYGzA00vOMGIDoT"
+            data-amount="<%= totalPayment*100 %>" 
+            data-name="Your Company"
+            data-description="Payment for your service"
+            data-currency="usd">
+      </script>
+    </form>
+  </body>

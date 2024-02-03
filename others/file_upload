@@ -1,0 +1,33 @@
+// [POST] /upload
+app.get("/upload", (req, res) => {
+  res.render("upload");
+});
+
+// [POST] /upload
+app.post("/upload", upload.single("file"), async (req, res) => {
+  if (!req.file) return res.json("File not given");
+  console.log(req.file);
+  console.log(req.body.details);
+  console.log(req.body.details === "");
+  console.log(req.body.details === '');
+  const file = req.file.path;
+  console.log(file);
+  try {
+    const pic = await Gallery.create({ name: file });
+    console.log(pic);
+    res.redirect("images");
+  } catch (error) {
+    res.json("Something went wrong");
+  }
+});
+
+// [GET] /images
+app.get("/images", async (req, res) => {
+  try {
+    const images = await Gallery.find();
+    console.log(images);
+    res.render("images", { images });
+  } catch (error) {
+    res.json("Something went wrong");
+  }
+});
